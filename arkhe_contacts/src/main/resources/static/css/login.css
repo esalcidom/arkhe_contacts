@@ -1,0 +1,64 @@
+body{
+  margin:0px;
+  padding:0px;
+  font-family: Poppins,sans-serif;
+}
+.main-container{
+  display:grid;
+  grid-template-columns:70% 30%;
+}
+.img-container{
+  grid-column:1/2;
+  position: relative;
+  background:linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(249, 93,111, 0.65) 100%), url(https://www.ballyofswitzerland.com/dw/image/v2/AAWE_PRD/on/demandware.static/-/Sites-bly-master-product-catalog/default/dw0abfa6aa/images/original/Weekend_Bags_STROKE_000F.jpg?sw=2000&sh=2000&sm=fit) no-repeat;
+background-size: cover;
+  opacity: .6;
+  height:100vh;
+  width:100%;
+}
+.login-container{
+  grid-column:2/3;
+  display:grid;
+  grid-template-columns:5% 90% 5%;
+  grid-template-rows:10% 15% 65% 5% 5%;
+  height:100%;
+}
+.login-container{
+  background:#FB8996;
+}
+.form-container{
+  grid-column:2/3;
+  grid-row:3/4;
+  width:100%;
+}
+#login-form{
+display:table;
+width:100%;
+}
+.lbl-login{
+padding-left:10px;
+font-size:30px;
+}
+.lbl-user{
+font-size:25px;
+}
+
+.lbl-login-container{
+grid-row:2/3;
+grid-column:2/3;
+height: 100%;
+}
+
+.btn-submit{
+width:45%;
+background: white;
+}
+
+.txt-container{
+margin:20px 0px;
+}
+.footer-container{
+grid-row:4/5;
+grid-column:2/3;
+font-size:11px;
+}

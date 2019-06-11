@@ -1,0 +1,29 @@
+body{
+    margin:0px;
+    padding:0px;
+    font-family: Cinzel,sans-serif;
+}
+
+.img-logo{
+    width: 100px;
+    height: 50px;
+}
+
+.img-user{
+    width: 45px;
+    height: 45px;
+    
+}
+
+.user-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.txt-user{
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    text-align: left;
+    
+}
