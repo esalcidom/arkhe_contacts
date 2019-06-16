@@ -31,6 +31,7 @@
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Mail</th>
+                        <th scope="col">Calle</th>
                     </tr>
                 </thead>
                     <tr th:each="contact:${contacts}">
@@ -38,6 +39,7 @@
                         <td th:text="${contact.firstName}"></td>
                         <td th:text="${contact.lastName}"></td>
                         <td th:text="${contact.email}"></td>
+                        <td th:text="${contact.addressId.street}"></td>
                     </tr>
             </table>
         </div>

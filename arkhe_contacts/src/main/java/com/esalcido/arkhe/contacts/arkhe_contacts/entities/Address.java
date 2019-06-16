@@ -2,57 +2,55 @@ package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  * Address
  */
 @Entity
-@Table(name="ADDRESS")
+@Table(name = "TABLE_ADDRESS")
 public class Address {
 
     @Id
-    @Column(name="ADDRESS_ID")
+    @Column(name = "ADDRESS_ID")
     @GeneratedValue
     private long AddressId;
-    @Column(name="STREET")
+    @Column(name = "STREET")
     private String street;
-    @Column(name="SUBURB")
-    private String suburb;    
-    @Column(name="NUMBER_EXT")
-    private String numberExt;
-    @Column(name="NUMER_INT")
-    private String numberInt;
-    @Column(name="ZIP_CODE")
+    @Column(name = "EXT_NUM")
+    private String extNum;
+    @Column(name = "INT_NUM")
+    private String intNum;
+    @Column(name = "ZIPCODE")
     private String zipCode;
-    @Column(name="REFERENCE")
-    private String reference;
-    @Column(name="CITY")
-    private int city;
-    @Column(name="STATE")
-    private int state;
-    @Column(name="COUNTRY")
-    private int country;
-    
+    @Column(name = "NEIGHBORHOOD")
+    private String neighbordhood;
+    @Column(name = "CITY_ID")
+    private int cityId;
+    @Column(name = "STATE_ID")
+    private int stateId;
+    @OneToOne(mappedBy = "addressId")
+    private Contact contact;
 
     public Address() {
     }
 
-    public Address(long AddressId, String street, String suburb, String numberExt, String numberInt, String zipCode, String reference, int city, int state, int country) {
+    public Address(long AddressId, String street, String extNum, String intNum, String zipCode, int cityId,
+            int stateiD) {
         this.AddressId = AddressId;
         this.street = street;
-        this.suburb = suburb;
-        this.numberExt = numberExt;
-        this.numberInt = numberInt;
+        this.extNum = extNum;
+        this.intNum = intNum;
         this.zipCode = zipCode;
-        this.reference = reference;
-        this.city = city;
-        this.state = state;
-        this.country = country;
+        this.cityId = cityId;
     }
 
     public long getAddressId() {
@@ -71,28 +69,20 @@ public class Address {
         this.street = street;
     }
 
-    public String getSuburb() {
-        return this.suburb;
+    public String getextNum() {
+        return this.extNum;
     }
 
-    public void setSuburb(String suburb) {
-        this.suburb = suburb;
+    public void setextNum(String extNum) {
+        this.extNum = extNum;
     }
 
-    public String getNumberExt() {
-        return this.numberExt;
+    public String getintNum() {
+        return this.intNum;
     }
 
-    public void setNumberExt(String numberExt) {
-        this.numberExt = numberExt;
-    }
-
-    public String getNumberInt() {
-        return this.numberInt;
-    }
-
-    public void setNumberInt(String numberInt) {
-        this.numberInt = numberInt;
+    public void setintNum(String intNum) {
+        this.intNum = intNum;
     }
 
     public String getZipCode() {
@@ -103,36 +93,20 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    public String getReference() {
-        return this.reference;
+    public int getCityId() {
+        return this.cityId;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
-    public int getCity() {
-        return this.city;
+    public int getStateId() {
+        return this.stateId;
     }
 
-    public void setCity(int city) {
-        this.city = city;
-    }
-
-    public int getState() {
-        return this.state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public int getCountry() {
-        return this.country;
-    }
-
-    public void setCountry(int country) {
-        this.country = country;
+    public void setStateId(int state) {
+        this.stateId = state;
     }
 
     public Address AddressId(long AddressId) {
@@ -145,18 +119,13 @@ public class Address {
         return this;
     }
 
-    public Address suburb(String suburb) {
-        this.suburb = suburb;
+    public Address extNum(String extNum) {
+        this.extNum = extNum;
         return this;
     }
 
-    public Address numberExt(String numberExt) {
-        this.numberExt = numberExt;
-        return this;
-    }
-
-    public Address numberInt(String numberInt) {
-        this.numberInt = numberInt;
+    public Address intNum(String intNum) {
+        this.intNum = intNum;
         return this;
     }
 
@@ -165,23 +134,13 @@ public class Address {
         return this;
     }
 
-    public Address reference(String reference) {
-        this.reference = reference;
+    public Address cityId(int cityId) {
+        this.cityId = cityId;
         return this;
     }
 
-    public Address city(int city) {
-        this.city = city;
-        return this;
-    }
-
-    public Address state(int state) {
-        this.state = state;
-        return this;
-    }
-
-    public Address country(int country) {
-        this.country = country;
+    public Address stateId(int state) {
+        this.stateId = state;
         return this;
     }
 
@@ -193,28 +152,22 @@ public class Address {
             return false;
         }
         Address address = (Address) o;
-        return AddressId == address.AddressId && Objects.equals(street, address.street) && Objects.equals(suburb, address.suburb) && Objects.equals(numberExt, address.numberExt) && Objects.equals(numberInt, address.numberInt) && Objects.equals(zipCode, address.zipCode) && Objects.equals(reference, address.reference) && city == address.city && state == address.state && country == address.country;
+        return AddressId == address.AddressId && Objects.equals(street, address.street)
+                && Objects.equals(extNum, address.extNum) && Objects.equals(intNum, address.intNum)
+                && Objects.equals(zipCode, address.zipCode) && cityId == address.cityId && stateId == address.stateId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(AddressId, street, suburb, numberExt, numberInt, zipCode, reference, city, state, country);
+        return Objects.hash(AddressId, street, extNum, intNum, zipCode, cityId, stateId);
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " AddressId='" + getAddressId() + "'" +
-            ", street='" + getStreet() + "'" +
-            ", suburb='" + getSuburb() + "'" +
-            ", numberExt='" + getNumberExt() + "'" +
-            ", numberInt='" + getNumberInt() + "'" +
-            ", zipCode='" + getZipCode() + "'" +
-            ", reference='" + getReference() + "'" +
-            ", city='" + getCity() + "'" +
-            ", state='" + getState() + "'" +
-            ", country='" + getCountry() + "'" +
-            "}";
+        return "{" + " AddressId='" + getAddressId() + "'" + ", street='" + getStreet() + "'" + "'" + ", extNum='"
+                + getextNum() + "'" + ", intNum='" + getintNum() + "'" + ", zipCode='" + getZipCode() + "'"
+                + ", reference='" + "'" + ", cityId='" + getCityId() + "'" + ", state='" + getStateId() + "'" + "'"
+                + "}";
     }
 
 }

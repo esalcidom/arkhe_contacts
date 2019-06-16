@@ -2,27 +2,30 @@ package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  * Gender
  */
 @Entity
-@Table(name="GENDER")
+@Table(name = "TABLE_GENDER")
 public class Gender {
 
     @Id
-    @Column(name="GENDER_ID")
+    @Column(name = "GENDER_ID")
     @GeneratedValue
     private int genderId;
-    @Column(name="NAME")
+    @Column(name = "GENDER_NAME")
     private String name;
-
-
+    @OneToOne(mappedBy = "gender")
+    private Contact contact;
 
     public Gender() {
     }
@@ -76,10 +79,7 @@ public class Gender {
 
     @Override
     public String toString() {
-        return "{" +
-            " genderId='" + getGenderId() + "'" +
-            ", name='" + getName() + "'" +
-            "}";
+        return "{" + " genderId='" + getGenderId() + "'" + ", name='" + getName() + "'" + "}";
     }
-    
+
 }
