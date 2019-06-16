@@ -5,10 +5,9 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,11 +32,13 @@ public class Address {
     private String zipCode;
     @Column(name = "NEIGHBORHOOD")
     private String neighbordhood;
-    @Column(name = "CITY_ID")
-    private int cityId;
-    @Column(name = "STATE_ID")
-    private int stateId;
-    @OneToOne(mappedBy = "addressId")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CITY_ID", referencedColumnName = "CITY_ID")
+    private City city;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "STATE_ID", referencedColumnName = "STATE_ID")
+    private State state;
+    @OneToOne(mappedBy = "address")
     private Contact contact;
 
     public Address() {
@@ -50,7 +51,6 @@ public class Address {
         this.extNum = extNum;
         this.intNum = intNum;
         this.zipCode = zipCode;
-        this.cityId = cityId;
     }
 
     public long getAddressId() {
@@ -93,20 +93,20 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    public int getCityId() {
-        return this.cityId;
+    public City getCity() {
+        return this.city;
     }
 
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
+    public void setCity(City city) {
+        this.city = city;
     }
 
-    public int getStateId() {
-        return this.stateId;
+    public State getState() {
+        return this.state;
     }
 
-    public void setStateId(int state) {
-        this.stateId = state;
+    public void setStateId(State state) {
+        this.state = state;
     }
 
     public Address AddressId(long AddressId) {
@@ -134,16 +134,6 @@ public class Address {
         return this;
     }
 
-    public Address cityId(int cityId) {
-        this.cityId = cityId;
-        return this;
-    }
-
-    public Address stateId(int state) {
-        this.stateId = state;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -154,19 +144,19 @@ public class Address {
         Address address = (Address) o;
         return AddressId == address.AddressId && Objects.equals(street, address.street)
                 && Objects.equals(extNum, address.extNum) && Objects.equals(intNum, address.intNum)
-                && Objects.equals(zipCode, address.zipCode) && cityId == address.cityId && stateId == address.stateId;
+                && Objects.equals(zipCode, address.zipCode) && city == address.city && state == address.state;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(AddressId, street, extNum, intNum, zipCode, cityId, stateId);
+        return Objects.hash(AddressId, street, extNum, intNum, zipCode, city, state);
     }
 
     @Override
     public String toString() {
         return "{" + " AddressId='" + getAddressId() + "'" + ", street='" + getStreet() + "'" + "'" + ", extNum='"
                 + getextNum() + "'" + ", intNum='" + getintNum() + "'" + ", zipCode='" + getZipCode() + "'"
-                + ", reference='" + "'" + ", cityId='" + getCityId() + "'" + ", state='" + getStateId() + "'" + "'"
+                + ", reference='" + "'" + ", cityId='" + getCity() + "'" + ", state='" + getState() + "'" + "'"
                 + "}";
     }
 

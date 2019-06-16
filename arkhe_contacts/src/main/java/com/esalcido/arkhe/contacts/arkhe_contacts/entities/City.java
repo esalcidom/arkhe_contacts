@@ -6,22 +6,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  * City
  */
 @Entity
-@Table(name="CITY")
+@Table(name="TABLE_CITY")
 public class City {
 
     @Id
     @Column(name="CITY_ID")
     @GeneratedValue
     private int CityId;
-    @Column(name="NAME")
+    @Column(name="CITY_NAME")
     private String name;
-    
+    @OneToOne(mappedBy = "city")
+    private Address address;
 
     public City() {
     }

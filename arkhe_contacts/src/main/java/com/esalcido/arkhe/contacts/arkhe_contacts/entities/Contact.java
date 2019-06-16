@@ -269,7 +269,7 @@ public class Contact {
     public String toString() {
         return "{" + " contactId='" + getContactId() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='"
                 + getLastName() + "'" + ", otherName='" + getOtherName() + "'" + ", phone='" + getPhone() + "'"
-                + ", email='" + getEmail() + "'" + ", address='" + getAddressId() + "'" + ", birthdate='"
+                + ", email='" + getEmail() + "'" + ", address='" + getAddress() + "'" + ", birthdate='"
                 + getBirthdate() + "'" + ", gender='" + getGender() + "'" + ", taxRegime='" + getTaxRegime() + "'"
                 + ", documentType='" + getDocumentType() + "'" + ", documentNumber='" + getDocumentNumber() + "'"
                 + ", lastUpdate='" + getLastUpdate() + "'" + "}";

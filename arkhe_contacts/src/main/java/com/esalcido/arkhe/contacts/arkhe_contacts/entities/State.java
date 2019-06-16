@@ -6,21 +6,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  * State
  */
 @Entity
-@Table(name="STATE")
+@Table(name="TABLE_STATE")
 public class State {
 
     @Id
     @Column(name="STATE_ID")
     @GeneratedValue
     private int stateId;
-    @Column(name="NAME")
+    @Column(name="STATE_NAME")
     private String name;
+    @OneToOne(mappedBy = "state")
+    private Address address;
 
 
     public State() {
