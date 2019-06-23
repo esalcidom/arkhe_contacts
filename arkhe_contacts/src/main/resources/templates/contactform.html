@@ -41,12 +41,27 @@
                 <input id="datepicker" type="date" name="datepicker" class="form-control" th:text="${#temporals.format(localDate, 'dd-mm-yyyy')}" th:field="*{birthdate}"/>
                 <div class="form-group col-md-4">
                     <label for="gender">Gender</label>
-                    <select class="form-control" name="input-gender" id="input-gender">
+                    <select class="form-control" name="input-gender" id="input-gender" th:field="*{gender.name}">
                         <option selected>Choose...</option>
                         <option >Male</option>
                         <option >Female</option>
                     </select>
                 </div>
+                <label for="street">Street</label>
+                <input type="text" class="form-control" id="input-street" placeholder="Av. Juarez" th:field="*{address.street}">
+                <label for="ext-number">Ext number</label>
+                <input type="text" class="form-control" id="input-ext-number" placeholder="1120" th:field="*{address.extNum}">
+                <label for="int-number">Int number</label>
+                <input type="text" class="form-control" id="input-int-number" placeholder="11" th:field="*{address.intNum}">
+                <label for="int-number">Int number</label>
+                <input type="text" class="form-control" id="input-int-number" placeholder="11" th:field="*{address.intNum}">
+
+                <input type="text" class="form-control" id="input-tax-regime" placeholder="persona fisica/moral" th:field="*{taxRegime.taxName}">
+
+                <input type="text" class="form-control" id="input-doc-type" placeholder="type of identification" th:field="*{documentType.documentName}">
+
+                <input type="text" class="form-control" id="input-doc-number" placeholder="persona fisica/moral" th:field="*{documentNumber}">
+
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>

@@ -31,7 +31,10 @@
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Mail</th>
-                        <th scope="col">Calle</th>
+                        <th scope="col">Address ID</th>
+                        <th scope="col">Gender ID</th>
+                        <th scope="col">TAX ID</th>
+                        <th scope="col">Document type</th>
                     </tr>
                 </thead>
                     <tr th:each="contact:${contacts}">
@@ -39,7 +42,10 @@
                         <td th:text="${contact.firstName}"></td>
                         <td th:text="${contact.lastName}"></td>
                         <td th:text="${contact.email}"></td>
-                        <td th:text="${contact.address.street}"></td>
+                        <td th:text="${contact.address.addressId}"></td>
+                        <td th:text="${contact.gender.genderId}"></td>
+                        <td th:text="${contact.taxRegime.taxID}"></td>
+                        <td th:text="${contact.documentType.documentId}"></td>
                     </tr>
             </table>
         </div>

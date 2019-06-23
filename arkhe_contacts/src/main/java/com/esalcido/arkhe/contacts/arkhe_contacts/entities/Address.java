@@ -21,7 +21,7 @@ public class Address {
     @Id
     @Column(name = "ADDRESS_ID")
     @GeneratedValue
-    private long AddressId;
+    private long addressId;
     @Column(name = "STREET")
     private String street;
     @Column(name = "EXT_NUM")
@@ -46,7 +46,7 @@ public class Address {
 
     public Address(long AddressId, String street, String extNum, String intNum, String zipCode, int cityId,
             int stateiD) {
-        this.AddressId = AddressId;
+        this.addressId = AddressId;
         this.street = street;
         this.extNum = extNum;
         this.intNum = intNum;
@@ -54,11 +54,11 @@ public class Address {
     }
 
     public long getAddressId() {
-        return this.AddressId;
+        return this.addressId;
     }
 
     public void setAddressId(long AddressId) {
-        this.AddressId = AddressId;
+        this.addressId = AddressId;
     }
 
     public String getStreet() {
@@ -110,7 +110,7 @@ public class Address {
     }
 
     public Address AddressId(long AddressId) {
-        this.AddressId = AddressId;
+        this.addressId = AddressId;
         return this;
     }
 
@@ -142,14 +142,14 @@ public class Address {
             return false;
         }
         Address address = (Address) o;
-        return AddressId == address.AddressId && Objects.equals(street, address.street)
+        return addressId == address.addressId && Objects.equals(street, address.street)
                 && Objects.equals(extNum, address.extNum) && Objects.equals(intNum, address.intNum)
                 && Objects.equals(zipCode, address.zipCode) && city == address.city && state == address.state;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(AddressId, street, extNum, intNum, zipCode, city, state);
+        return Objects.hash(addressId, street, extNum, intNum, zipCode, city, state);
     }
 
     @Override

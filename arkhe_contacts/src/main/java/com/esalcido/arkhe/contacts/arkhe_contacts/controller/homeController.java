@@ -1,5 +1,6 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.controller;
 
+import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Address;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Contact;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactRepository;
 
@@ -26,6 +27,7 @@ public class homeController {
 
     @GetMapping("/contact/new")
     public String newContact(Model model){
+        model.addAttribute("address", new Address());
         model.addAttribute("contact", new Contact());
         return "contactform";
     }

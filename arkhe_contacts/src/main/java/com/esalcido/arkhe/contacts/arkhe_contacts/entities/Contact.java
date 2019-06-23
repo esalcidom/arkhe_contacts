@@ -62,11 +62,13 @@ public class Contact {
     @Column(name = "LAST_UPDATE")
     private Date lastUpdate;
 
+    private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
     public Contact() {
     }
 
     public Contact(long contactId, String firstName, String lastName, String otherName, String phone, String email,
-            Date birthdate, String documentNumber, Date lastUpdate) {
+            Date birthdate, String documentNumber) {
         this.contactId = contactId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -75,7 +77,7 @@ public class Contact {
         this.email = email;
         this.birthdate = birthdate;
         this.documentNumber = documentNumber;
-        this.lastUpdate = lastUpdate;
+        this.lastUpdate = dateFormat.format(new Date());
     }
 
     public long getContactId() {
