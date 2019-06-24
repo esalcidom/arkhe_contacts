@@ -1,5 +1,7 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -62,7 +64,7 @@ public class Contact {
     @Column(name = "LAST_UPDATE")
     private Date lastUpdate;
 
-    private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    //private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public Contact() {
     }
@@ -77,7 +79,7 @@ public class Contact {
         this.email = email;
         this.birthdate = birthdate;
         this.documentNumber = documentNumber;
-        this.lastUpdate = dateFormat.format(new Date());
+        this.lastUpdate = new Date();
     }
 
     public long getContactId() {

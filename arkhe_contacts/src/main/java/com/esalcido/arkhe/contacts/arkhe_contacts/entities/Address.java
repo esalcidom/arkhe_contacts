@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -20,7 +21,7 @@ public class Address {
 
     @Id
     @Column(name = "ADDRESS_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long addressId;
     @Column(name = "STREET")
     private String street;
@@ -44,13 +45,22 @@ public class Address {
     public Address() {
     }
 
-    public Address(long AddressId, String street, String extNum, String intNum, String zipCode, int cityId,
-            int stateiD) {
+    public Address(long AddressId, String street, String extNum, String intNum, String zipCode, City city, State state) {
         this.addressId = AddressId;
         this.street = street;
         this.extNum = extNum;
         this.intNum = intNum;
         this.zipCode = zipCode;
+        this.city = city;
+        this.state = state;
+    }
+
+    public String getNeighbordhood(){
+        return this.neighbordhood;
+    }
+
+    public void setNeighbordhood(String neighbordhood){
+        this.neighbordhood = neighbordhood;
     }
 
     public long getAddressId() {
@@ -105,7 +115,7 @@ public class Address {
         return this.state;
     }
 
-    public void setStateId(State state) {
+    public void setState(State state) {
         this.state = state;
     }
 
@@ -156,7 +166,7 @@ public class Address {
     public String toString() {
         return "{" + " AddressId='" + getAddressId() + "'" + ", street='" + getStreet() + "'" + "'" + ", extNum='"
                 + getextNum() + "'" + ", intNum='" + getintNum() + "'" + ", zipCode='" + getZipCode() + "'"
-                + ", reference='" + "'" + ", cityId='" + getCity() + "'" + ", state='" + getState() + "'" + "'"
+                + ", reference='" + "'" + ", city='" + getCity() + "'" + ", state='" + getState() + "'" + "'"
                 + "}";
     }
 

@@ -1,8 +1,17 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.controller;
 
+import java.util.List;
+
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Address;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Contact;
+import com.esalcido.arkhe.contacts.arkhe_contacts.entities.State;
+import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.AddressRepository;
+import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.CityRepository;
+import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactIdentRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactRepository;
+import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.GenderRepository;
+import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.StateRepository;
+import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.TaxRefRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +27,21 @@ public class homeController {
 
     @Autowired
     private ContactRepository contactRepostitory;
+    @Autowired
+    private AddressRepository addressRepository;
+    @Autowired
+    private CityRepository cityRepository;
+    @Autowired
+    private ContactIdentRepository ContactIdentRepository;
+    @Autowired
+    private GenderRepository genderRepository;
+    @Autowired
+    private StateRepository stateRepository;
+    @Autowired
+    private TaxRefRepository taxRefRepository;
+    
+
+    
 
     @GetMapping("/home")
     public String getContacts(Model model){
@@ -27,6 +51,8 @@ public class homeController {
 
     @GetMapping("/contact/new")
     public String newContact(Model model){
+        
+        model.addAttribute("stateList", stateRepository.findAll());
         model.addAttribute("address", new Address());
         model.addAttribute("contact", new Contact());
         return "contactform";

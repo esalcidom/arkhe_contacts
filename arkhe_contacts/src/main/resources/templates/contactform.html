@@ -42,9 +42,8 @@
                 <div class="form-group col-md-4">
                     <label for="gender">Gender</label>
                     <select class="form-control" name="input-gender" id="input-gender" th:field="*{gender.name}">
-                        <option selected>Choose...</option>
-                        <option >Male</option>
-                        <option >Female</option>
+                        <option value="Male" selected>Male</option>
+                        <option value="Female">Female</option>
                     </select>
                 </div>
                 <label for="street">Street</label>
@@ -53,13 +52,41 @@
                 <input type="text" class="form-control" id="input-ext-number" placeholder="1120" th:field="*{address.extNum}">
                 <label for="int-number">Int number</label>
                 <input type="text" class="form-control" id="input-int-number" placeholder="11" th:field="*{address.intNum}">
-                <label for="int-number">Int number</label>
-                <input type="text" class="form-control" id="input-int-number" placeholder="11" th:field="*{address.intNum}">
+                <label for="zipcode">Zipcode</label>
+                <input type="text" class="form-control" id="input-zipcode" placeholder="zipcode #" th:field="*{address.zipCode}">
+                <label for="neighborhood">neighborhood</label>
+                <input type="text" class="form-control" id="input-neighborhood" placeholder="col" th:field="*{address.neighbordhood}">
+                <label for="city-name">city</label>
+                <input type="text" class="form-control" id="input-city-name" placeholder="col" th:field="*{address.city.name}">
+                
+                <div class="form-group col-md-4">
+                    <label for="state-name">state</label>
+                    <select class="form-control" name="input-state-list" id="input-state" th:field="*{selectedState}">
+                        <option th:each="state:${stateList}" th:value="state" th:text="state.name"></option>
+                        
+                    </select>
+                </div>
+                <!-- <input type="text" class="form-control" id="input-state-name" placeholder="col" th:field="*{address.state.name}"> -->
+                <div class="form-group col-md-4">
+                    <label for="taxRef">tax regime</label>
+                    <select class="form-control" name="input-tax-regime" id="input-gender" th:field="*{taxRegime.taxName}">
+                        <option value="PERSONA FISICA" selected>Persona Fisica</option>
+                        <option value="PERSONA MORAL">Persona Moral</option>
+                    </select>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label for="document-type">document type</label>
+                    <select class="form-control" name="input-doc-type" id="input-doc-type" th:field="*{taxRegime.taxName}">
+                        <option value="PERSONA FISICA" selected>Persona Fisica</option>
+                        <option value="PERSONA MORAL">Persona Moral</option>
+                    </select>
+                </div>
 
-                <input type="text" class="form-control" id="input-tax-regime" placeholder="persona fisica/moral" th:field="*{taxRegime.taxName}">
+                
+                <!-- <input type="text" class="form-control" id="input-doc-type" placeholder="type of identification" th:field="*{documentType.documentName}"> -->
 
-                <input type="text" class="form-control" id="input-doc-type" placeholder="type of identification" th:field="*{documentType.documentName}">
-
+                <label for="document-number">document number</label>
                 <input type="text" class="form-control" id="input-doc-number" placeholder="persona fisica/moral" th:field="*{documentNumber}">
 
             </div>
