@@ -45,7 +45,8 @@ public class Address {
     public Address() {
     }
 
-    public Address(long AddressId, String street, String extNum, String intNum, String zipCode, City city, State state) {
+    public Address(long AddressId, String street, String extNum, String intNum, String zipCode, City city,
+            State state) {
         this.addressId = AddressId;
         this.street = street;
         this.extNum = extNum;
@@ -55,11 +56,11 @@ public class Address {
         this.state = state;
     }
 
-    public String getNeighbordhood(){
+    public String getNeighbordhood() {
         return this.neighbordhood;
     }
 
-    public void setNeighbordhood(String neighbordhood){
+    public void setNeighbordhood(String neighbordhood) {
         this.neighbordhood = neighbordhood;
     }
 

@@ -76,9 +76,8 @@
                 
                 <div class="form-group col-md-4">
                     <label for="document-type">document type</label>
-                    <select class="form-control" name="input-doc-type" id="input-doc-type" th:field="*{taxRegime.taxName}">
-                        <option value="PERSONA FISICA" selected>Persona Fisica</option>
-                        <option value="PERSONA MORAL">Persona Moral</option>
+                    <select class="form-control" name="input-doc-type" id="input-doc-type" th:field="*{selectedDocumentType}">
+                        <option th:each="docType:$(docTypeList)" th:value="docType" th:text="docType.documentName"></option>
                     </select>
                 </div>
 

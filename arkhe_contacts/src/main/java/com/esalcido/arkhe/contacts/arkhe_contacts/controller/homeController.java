@@ -2,9 +2,13 @@ package com.esalcido.arkhe.contacts.arkhe_contacts.controller;
 
 import java.util.List;
 
+import javax.validation.constraints.Null;
+
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Address;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Contact;
+import com.esalcido.arkhe.contacts.arkhe_contacts.entities.ContactIdent;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.State;
+import com.esalcido.arkhe.contacts.arkhe_contacts.entities.TaxRef;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.AddressRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.CityRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactIdentRepository;
@@ -21,7 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 @Controller
 public class homeController {
 
@@ -32,36 +35,34 @@ public class homeController {
     @Autowired
     private CityRepository cityRepository;
     @Autowired
-    private ContactIdentRepository ContactIdentRepository;
+    private ContactIdentRepository contactIdentRepository;
     @Autowired
     private GenderRepository genderRepository;
     @Autowired
     private StateRepository stateRepository;
     @Autowired
     private TaxRefRepository taxRefRepository;
-    
-
-    
 
     @GetMapping("/home")
-    public String getContacts(Model model){
+    public String getContacts(Model model) {
         model.addAttribute("contacts", contactRepostitory.findAll());
         return "home";
     }
 
     @GetMapping("/contact/new")
-    public String newContact(Model model){
-        
+    public String newContact(Model model) {
+
+        State selectedState = null;
+        TaxRef selectedTaxReg = null;
+        ContactIdent selectedDocumentType = null;
+        model.addAttribute("taxList", taxRefRepository.findAll());
+        model.addAttribute("docTypeList", contactIdentRepository.findAll());
+        model.addAttribute("selectedState", selectedState);
+        model.addAttribute("selectedTaxReg", selectedTaxReg);
+        model.addAttribute("selectedDocumentType", selectedDocumentType);
         model.addAttribute("stateList", stateRepository.findAll());
         model.addAttribute("address", new Address());
-        model.addAttribute("contact", new Contact());
+
         return "contactform";
     }
-
-    @PostMapping("/contact")
-    public String createContact(Contact contact, Model model){
-        contactRepostitory.save(contact);
-        return "redirect:/home";
-    }
-    
 }
