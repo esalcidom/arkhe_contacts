@@ -69,9 +69,8 @@
                 <!-- <input type="text" class="form-control" id="input-state-name" placeholder="col" th:field="*{address.state.name}"> -->
                 <div class="form-group col-md-4">
                     <label for="taxRef">tax regime</label>
-                    <select class="form-control" name="input-tax-regime" id="input-gender" th:field="*{taxRegime.taxName}">
-                        <option value="PERSONA FISICA" selected>Persona Fisica</option>
-                        <option value="PERSONA MORAL">Persona Moral</option>
+                    <select class="form-control" name="input-tax-regime" id="input-gender" th:field="*{selectedTaxReg}">
+                        <option th:each="taxR:${taxList}" th:value="taxR" th:text="taxR.taxName"></option>
                     </select>
                 </div>
                 
