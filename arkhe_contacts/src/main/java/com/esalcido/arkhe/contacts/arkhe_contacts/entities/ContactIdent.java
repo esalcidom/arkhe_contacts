@@ -35,7 +35,7 @@ public class ContactIdent {
         this.documentName = documentName;
     }
 
-    public int getDocumentId() {
+    public long getDocumentId() {
         return documentId;
     }
 

@@ -41,11 +41,12 @@
                 <input id="datepicker" type="date" name="datepicker" class="form-control" th:text="${#temporals.format(localDate, 'dd-mm-yyyy')}" th:field="*{birthdate}"/>
                 <div class="form-group col-md-4">
                     <label for="gender">Gender</label>
-                    <select class="form-control" name="input-gender" id="input-gender" th:field="*{gender.name}">
-                        <option value="Male" selected>Male</option>
-                        <option value="Female">Female</option>
+                    <select class="form-control" name="input-gender" id="input-gender" th:field="*{gender}">
+                        <option th:each="gender:${genderList}" th:value="${gender}" th:text="${gender.name}"></option>
                     </select>
                 </div>
+                <br>
+                <label for="address">Address</label>
                 <label for="street">Street</label>
                 <input type="text" class="form-control" id="input-street" placeholder="Av. Juarez" th:field="*{address.street}">
                 <label for="ext-number">Ext number</label>
@@ -61,23 +62,23 @@
                 
                 <div class="form-group col-md-4">
                     <label for="state-name">state</label>
-                    <select class="form-control" name="input-state-list" id="input-state" th:field="*{selectedState}">
-                        <option th:each="state:${stateList}" th:value="state" th:text="state.name"></option>
+                    <select class="form-control" name="input-state-list" id="input-state" th:field="*{address.state}">
+                        <option th:each="state:${stateList}" th:value="${state}" th:text="${state.name}"></option>
                         
                     </select>
                 </div>
                 <!-- <input type="text" class="form-control" id="input-state-name" placeholder="col" th:field="*{address.state.name}"> -->
                 <div class="form-group col-md-4">
                     <label for="taxRef">tax regime</label>
-                    <select class="form-control" name="input-tax-regime" id="input-gender" th:field="*{selectedTaxReg}">
-                        <option th:each="taxR:${taxList}" th:value="taxR" th:text="taxR.taxName"></option>
+                    <select class="form-control" name="input-tax-regime" id="input-gender" th:field="*{taxRegime}">
+                        <option th:each="taxR:${taxList}" th:value="${taxR}" th:text="${taxR.taxName}"></option>
                     </select>
                 </div>
                 
                 <div class="form-group col-md-4">
                     <label for="document-type">document type</label>
-                    <select class="form-control" name="input-doc-type" id="input-doc-type" th:field="*{selectedDocumentType}">
-                        <option th:each="docType:$(docTypeList)" th:value="docType" th:text="docType.documentName"></option>
+                    <select class="form-control" name="input-doc-type" id="input-doc-type" th:field="*{documentType}">
+                        <option th:each="dType:${docList}" th:value="${dType}" th:text="${dType.documentName}"></option>
                     </select>
                 </div>
 

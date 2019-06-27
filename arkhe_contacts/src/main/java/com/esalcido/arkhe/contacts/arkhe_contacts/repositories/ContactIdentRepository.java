@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
  * ContactIdentRepository
  */
 @Repository("contactIdentRepository")
-public interface ContactIdentRepository extends CrudRepository<ContactIdent, Long>{
+public interface ContactIdentRepository extends CrudRepository<ContactIdent, Integer> {
 
-    
 }

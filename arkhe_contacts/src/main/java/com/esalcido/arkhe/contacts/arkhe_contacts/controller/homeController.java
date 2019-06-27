@@ -52,17 +52,12 @@ public class homeController {
     @GetMapping("/contact/new")
     public String newContact(Model model) {
 
-        State selectedState = null;
-        TaxRef selectedTaxReg = null;
-        ContactIdent selectedDocumentType = null;
+        model.addAttribute("genderList", genderRepository.findAll());
         model.addAttribute("taxList", taxRefRepository.findAll());
-        model.addAttribute("docTypeList", contactIdentRepository.findAll());
-        model.addAttribute("selectedState", selectedState);
-        model.addAttribute("selectedTaxReg", selectedTaxReg);
-        model.addAttribute("selectedDocumentType", selectedDocumentType);
+        model.addAttribute("docList", contactIdentRepository.findAll());
         model.addAttribute("stateList", stateRepository.findAll());
-        model.addAttribute("address", new Address());
-
+        // model.addAttribute("address", new Address());
+        model.addAttribute("contact", new Contact());
         return "contactform";
     }
 }
