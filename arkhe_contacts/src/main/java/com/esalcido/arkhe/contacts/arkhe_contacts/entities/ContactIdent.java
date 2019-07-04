@@ -23,8 +23,8 @@ public class ContactIdent {
     private int documentId;
     @Column(name = "DOCUMENT_NAME")
     private String documentName;
-    @OneToOne(mappedBy = "documentType")
-    private Contact contact;
+    // @OneToOne(mappedBy = "documentType")
+    // private Contact contact;
 
     public ContactIdent() {
 

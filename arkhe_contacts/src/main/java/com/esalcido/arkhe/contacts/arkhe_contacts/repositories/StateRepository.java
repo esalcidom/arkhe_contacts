@@ -4,14 +4,12 @@ import java.util.List;
 
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.State;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  * StateRepository
  */
 @Repository("stateRepository")
-public interface StateRepository extends CrudRepository<State, Integer>{
-
-    List<State> findAll();
+public interface StateRepository extends JpaRepository<State, Long>{
 }

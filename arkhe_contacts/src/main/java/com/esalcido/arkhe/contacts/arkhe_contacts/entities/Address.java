@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,14 +34,16 @@ public class Address {
     private String zipCode;
     @Column(name = "NEIGHBORHOOD")
     private String neighbordhood;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CITY_ID", referencedColumnName = "CITY_ID")
+    //@OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CITY_ID", referencedColumnName = "CITY_ID", nullable = false)
     private City city;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "STATE_ID", referencedColumnName = "STATE_ID")
+    //@OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "STATE_ID", referencedColumnName = "STATE_ID", nullable = false)
     private State state;
-    @OneToOne(mappedBy = "address")
-    private Contact contact;
+    // @OneToOne(mappedBy = "address")
+    // private Contact contact;
 
     public Address() {
     }

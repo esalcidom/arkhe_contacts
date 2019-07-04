@@ -43,21 +43,25 @@ public class Contact {
     private String phone;
     @Column(name = "EMAIL")
     private String email;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
+    //@OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID", nullable = false)
     private Address address;
     @Column(name = "BIRTHDATE")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = ISO.DATE)
     private Date birthdate;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "GENDER", referencedColumnName = "GENDER_ID")
+    //@OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "GENDER", referencedColumnName = "GENDER_ID", nullable = false)
     private Gender gender;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "TAX_REGIME", referencedColumnName = "TAX_ID")
+    //@OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "TAX_REGIME", referencedColumnName = "TAX_ID", nullable = false)
     private TaxRef taxRegime;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "DOCUMENT_TYPE", referencedColumnName = "DOCUMENT_ID")
+    //@OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "DOCUMENT_TYPE", referencedColumnName = "DOCUMENT_ID", nullable = false)
     private ContactIdent documentType;
     @Column(name = "DOCUMENT_NUMBER")
     private String documentNumber;
@@ -67,6 +71,7 @@ public class Contact {
     //private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public Contact() {
+        
     }
 
     public Contact(long contactId, String firstName, String lastName, String otherName, String phone, String email,

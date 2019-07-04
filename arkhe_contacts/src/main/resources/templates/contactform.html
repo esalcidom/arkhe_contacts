@@ -42,7 +42,7 @@
                 <div class="form-group col-md-4">
                     <label for="gender">Gender</label>
                     <select class="form-control" name="input-gender" id="input-gender" th:field="*{gender}">
-                        <option th:each="gender:${genderList}" th:value="${gender}" th:text="${gender.name}"></option>
+                        <option th:each="gender:${genderList}" th:value="${gender.genderId}" th:text="${gender.name}"></option>
                     </select>
                 </div>
                 <br>
@@ -58,12 +58,12 @@
                 <label for="neighborhood">neighborhood</label>
                 <input type="text" class="form-control" id="input-neighborhood" placeholder="col" th:field="*{address.neighbordhood}">
                 <label for="city-name">city</label>
-                <input type="text" class="form-control" id="input-city-name" placeholder="col" th:field="*{address.city.name}">
+                <input type="text" class="form-control" id="input-city-name" placeholder="city" th:field="*{address.city.name}" style="text-transform:uppercase">
                 
                 <div class="form-group col-md-4">
                     <label for="state-name">state</label>
                     <select class="form-control" name="input-state-list" id="input-state" th:field="*{address.state}">
-                        <option th:each="state:${stateList}" th:value="${state}" th:text="${state.name}"></option>
+                        <option th:each="state:${stateList}" th:value="${state.stateId}" th:text="${state.name}"></option>
                         
                     </select>
                 </div>
@@ -71,14 +71,14 @@
                 <div class="form-group col-md-4">
                     <label for="taxRef">tax regime</label>
                     <select class="form-control" name="input-tax-regime" id="input-gender" th:field="*{taxRegime}">
-                        <option th:each="taxR:${taxList}" th:value="${taxR}" th:text="${taxR.taxName}"></option>
+                        <option th:each="taxR:${taxList}" th:value="${taxR.taxID}" th:text="${taxR.taxName}"></option>
                     </select>
                 </div>
                 
                 <div class="form-group col-md-4">
                     <label for="document-type">document type</label>
                     <select class="form-control" name="input-doc-type" id="input-doc-type" th:field="*{documentType}">
-                        <option th:each="dType:${docList}" th:value="${dType}" th:text="${dType.documentName}"></option>
+                        <option th:each="dType:${docList}" th:value="${dType.documentId}" th:text="${dType.documentName}"></option>
                     </select>
                 </div>
 

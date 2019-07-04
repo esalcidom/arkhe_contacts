@@ -23,8 +23,8 @@ public class City {
     private int CityId;
     @Column(name="CITY_NAME")
     private String name;
-    @OneToOne(mappedBy = "city")
-    private Address address;
+    // @OneToOne(mappedBy = "city")
+    // private Address address;
 
     public City() {
     }

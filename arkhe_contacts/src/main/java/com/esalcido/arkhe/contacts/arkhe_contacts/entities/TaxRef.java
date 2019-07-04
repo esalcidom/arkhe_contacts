@@ -25,8 +25,8 @@ public class TaxRef {
     private int taxID;
     @Column(name = "TAX_NAME")
     private String taxName;
-    @OneToOne(mappedBy = "taxRegime")
-    private Contact contact;
+    // @OneToOne(mappedBy = "taxRegime")
+    // private Contact contact;
 
     public int getTaxID() {
         return taxID;

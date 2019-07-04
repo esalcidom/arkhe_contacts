@@ -25,8 +25,8 @@ public class Gender {
     private int genderId;
     @Column(name = "GENDER_NAME")
     private String name;
-    @OneToOne(mappedBy = "gender")
-    private Contact contact;
+    // @OneToOne(mappedBy = "gender")
+    // private Contact contact;
 
     public Gender() {
     }

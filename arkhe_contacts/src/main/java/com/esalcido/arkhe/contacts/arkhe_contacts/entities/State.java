@@ -20,26 +20,26 @@ public class State {
     @Id
     @Column(name="STATE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int stateId;
+    private long stateId;
     @Column(name="STATE_NAME")
     private String name;
-    @OneToOne(mappedBy = "state")
-    private Address address;
+    // @OneToOne(mappedBy = "state")
+    // private Address address;
 
 
     public State() {
     }
 
-    public State(int stateId, String name) {
+    public State(long stateId, String name) {
         this.stateId = stateId;
         this.name = name;
     }
 
-    public int getStateId() {
+    public long getStateId() {
         return this.stateId;
     }
 
-    public void setStateId(int stateId) {
+    public void setStateId(long stateId) {
         this.stateId = stateId;
     }
 
@@ -51,7 +51,7 @@ public class State {
         this.name = name;
     }
 
-    public State stateId(int stateId) {
+    public State state(long stateId) {
         this.stateId = stateId;
         return this;
     }
