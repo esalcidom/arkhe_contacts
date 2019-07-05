@@ -40,14 +40,14 @@ public class homeController {
     private AddressRepository addressRepository;
     @Autowired
     private CityRepository cityRepository;
-    @Autowired
-    private ContactIdentRepository contactIdentRepository;
-    @Autowired
-    private GenderRepository genderRepository;
-    @Autowired
-    private StateRepository stateRepository;
-    @Autowired
-    private TaxRefRepository taxRefRepository;
+    // @Autowired
+    // private ContactIdentRepository contactIdentRepository;
+    // @Autowired
+    // private GenderRepository genderRepository;
+    // @Autowired
+    // private StateRepository stateRepository;
+    // @Autowired
+    // private TaxRefRepository taxRefRepository;
 
     @GetMapping("/home")
     public String getContacts(Model model) {
@@ -55,22 +55,23 @@ public class homeController {
         return "home";
     }
 
-    @GetMapping("/contact/new")
-    public String newContact(Model model) {
+    // @GetMapping("/contact/new")
+    // public String newContact(Model model) {
 
-        model.addAttribute("genderList", genderRepository.findAll());
-        model.addAttribute("taxList", taxRefRepository.findAll());
-        model.addAttribute("docList", contactIdentRepository.findAll());
-        model.addAttribute("stateList", stateRepository.findAll());
-        model.addAttribute("contact", new Contact());
-        return "contactform";
-    }
+    // model.addAttribute("genderList", genderRepository.findAll());
+    // model.addAttribute("taxList", taxRefRepository.findAll());
+    // model.addAttribute("docList", contactIdentRepository.findAll());
+    // model.addAttribute("stateList", stateRepository.findAll());
+    // model.addAttribute("contact", new Contact());
+    // return "contactform";
+    // }
 
     @PostMapping("/contact")
-    public String createContact(@ModelAttribute("contact") Contact contact, BindingResult result, SessionStatus status){
+    public String createContact(@ModelAttribute("contact") Contact contact, BindingResult result,
+            SessionStatus status) {
         Address address = contact.getAddress();
         City city = (cityRepository.findByName(address.getCity().getName().toUpperCase()));
-        if (city == null){
+        if (city == null) {
             city = cityRepository.save(address.getCity());
         }
         address.setCity(city);

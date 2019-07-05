@@ -37,7 +37,8 @@
                         <th scope="col">Document type</th>
                     </tr>
                 </thead>
-                    <tr th:each="contact:${contacts}">
+                    <tr th:each="contact:${contacts}" style="cursor: pointer"
+                    th:onclick="'javascript:rowClicked(\'' + ${contact.contactId} + '\');'">
                         <td th:text="${contact.contactId}"></td>
                         <td th:text="${contact.firstName}"></td>
                         <td th:text="${contact.lastName}"></td>
@@ -52,4 +53,9 @@
         <button type="button" class="btn btn-success" onclick="location.href = 'contact/new'">+</button>
     </div>
 </body>
+<script>
+    function rowClicked(value) {
+        location.href = "/contact/" + value;
+    }
+</script>
 </html>
