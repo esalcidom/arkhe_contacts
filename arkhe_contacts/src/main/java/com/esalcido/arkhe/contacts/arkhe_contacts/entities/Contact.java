@@ -71,7 +71,7 @@ public class Contact {
     //private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public Contact() {
-        
+        this.address = new Address();
     }
 
     public Contact(long contactId, String firstName, String lastName, String otherName, String phone, String email,
