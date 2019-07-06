@@ -27,7 +27,7 @@
         </nav>
     </nav>
     <div class="container">
-        <form th:object="${contact}" th:action="@{/contact}" method="post">
+        <form th:object="*{contact}" th:action="@{/contact}" method="post">
             <div class="form-row">
                 <label for="first-name">First Name</label>
                 <input type="text" class="form-control" id="input-first-name" placeholder="Juan" th:field="*{firstName}">

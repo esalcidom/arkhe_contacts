@@ -36,10 +36,10 @@ public class homeController {
 
     @Autowired
     private ContactRepository contactRepostitory;
-    @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
-    private CityRepository cityRepository;
+    // @Autowired
+    // private AddressRepository addressRepository;
+    // @Autowired
+    // private CityRepository cityRepository;
     // @Autowired
     // private ContactIdentRepository contactIdentRepository;
     // @Autowired
@@ -55,29 +55,4 @@ public class homeController {
         return "home";
     }
 
-    // @GetMapping("/contact/new")
-    // public String newContact(Model model) {
-
-    // model.addAttribute("genderList", genderRepository.findAll());
-    // model.addAttribute("taxList", taxRefRepository.findAll());
-    // model.addAttribute("docList", contactIdentRepository.findAll());
-    // model.addAttribute("stateList", stateRepository.findAll());
-    // model.addAttribute("contact", new Contact());
-    // return "contactform";
-    // }
-
-    @PostMapping("/contact")
-    public String createContact(@ModelAttribute("contact") Contact contact, BindingResult result,
-            SessionStatus status) {
-        Address address = contact.getAddress();
-        City city = (cityRepository.findByName(address.getCity().getName().toUpperCase()));
-        if (city == null) {
-            city = cityRepository.save(address.getCity());
-        }
-        address.setCity(city);
-        address = addressRepository.save(address);
-        contact.setAddress(address);
-        contactRepostitory.save(contact);
-        return "redirect:/home";
-    }
 }
