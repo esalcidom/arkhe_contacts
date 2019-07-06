@@ -27,8 +27,10 @@
         </nav>
     </nav>
     <div class="container">
-        <form th:object="*{contact}" th:action="@{/contact}" method="post">
+        <form id="form-contact" th:object="${contact}" th:action="@{/contact}" method="post">
             <div class="form-row">
+                <input type="hidden" class="form-control" id="input-contact-id" th:field="*{contactId}" th:value="*{contactId}">
+                <input type="hidden" class="form-control" id="input-address-id" th:field="*{address.addressId}" th:value="*{address.addressId}">
                 <label for="first-name">First Name</label>
                 <input type="text" class="form-control" id="input-first-name" placeholder="Juan" th:field="*{firstName}">
                 <label for="last-name">Last Name</label>

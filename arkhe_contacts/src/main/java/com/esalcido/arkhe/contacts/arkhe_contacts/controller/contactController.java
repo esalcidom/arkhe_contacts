@@ -26,7 +26,7 @@ import org.springframework.web.bind.support.SessionStatus;
  * contactController
  */
 @Controller
-public class contactController {
+public class ContactController {
 
     @Autowired
     private ContactRepository contactRepostitory;
@@ -61,17 +61,13 @@ public class contactController {
         model.addAttribute("taxList", taxRefRepository.findAll());
         model.addAttribute("docList", contactIdentRepository.findAll());
         model.addAttribute("stateList", stateRepository.findAll());
-        model.addAttribute("contact", contactRepostitory.findById(Long.parseLong(contact_id)));
+        model.addAttribute("contact", contactRepostitory.findById(Long.parseLong(contact_id)).get());
         return "contactform";
     }
 
     @PostMapping("/contact")
     public String createContact(@ModelAttribute("contact") Contact contact, BindingResult result,
             SessionStatus status) {
-        if (contact.getContactId() > 0) {
-            contactRepostitory.save(contact);
-            return "redirect:/home";
-        }
         Address address = contact.getAddress();
         City city = (cityRepository.findByName(address.getCity().getName().toUpperCase()));
         if (city == null) {
