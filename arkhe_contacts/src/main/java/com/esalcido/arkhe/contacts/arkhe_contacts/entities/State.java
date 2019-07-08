@@ -1,5 +1,6 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,22 +11,24 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * State
  */
 @Entity
-@Table(name="TABLE_STATE")
-public class State {
+@Table(name = "TABLE_STATE")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class State implements Serializable {
 
     @Id
-    @Column(name="STATE_ID")
+    @Column(name = "STATE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long stateId;
-    @Column(name="STATE_NAME")
+    @Column(name = "STATE_NAME")
     private String name;
     // @OneToOne(mappedBy = "state")
     // private Address address;
-
 
     public State() {
     }
@@ -79,10 +82,7 @@ public class State {
 
     @Override
     public String toString() {
-        return "{" +
-            " stateId='" + getStateId() + "'" +
-            ", name='" + getName() + "'" +
-            "}";
+        return "{" + " stateId='" + getStateId() + "'" + ", name='" + getName() + "'" + "}";
     }
 
 }

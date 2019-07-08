@@ -1,5 +1,6 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -11,34 +12,34 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
-public class User{
+@Table(name = "USER")
+public class User implements Serializable {
     @Id
-    @Column(name="USER_ID")
+    @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
-    @Column(name="FIRST_NAME")
+    @Column(name = "FIRST_NAME")
     private String firstName;
-    @Column(name="LAST_NAME")
+    @Column(name = "LAST_NAME")
     private String lastName;
-    @Column(name="LOGIN_NAME")
+    @Column(name = "LOGIN_NAME")
     private String loginName;
-    @Column(name="PASS")
+    @Column(name = "PASS")
     private String pass;
-    @Column(name="IS_BLOQUED")
+    @Column(name = "IS_BLOQUED")
     private int isBloqued;
-    @Column(name="LAST_LOGIN")
+    @Column(name = "LAST_LOGIN")
     private Date lastLogin;
-    @Column(name="LAST_BAD_LOGIN")
+    @Column(name = "LAST_BAD_LOGIN")
     private Date lastBadLogin;
-    @Column(name="BAD_LOGIN_COUNT")
+    @Column(name = "BAD_LOGIN_COUNT")
     private int badLoginCount;
-
 
     public User() {
     }
 
-    public User(long userId, String firstName, String lastName, String loginName, String pass, int isBloqued, Date lastLogin, Date lastBadLogin, int badLoginCount) {
+    public User(long userId, String firstName, String lastName, String loginName, String pass, int isBloqued,
+            Date lastLogin, Date lastBadLogin, int badLoginCount) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -175,28 +176,25 @@ public class User{
             return false;
         }
         User user = (User) o;
-        return userId == user.userId && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(loginName, user.loginName) && Objects.equals(pass, user.pass) && isBloqued == user.isBloqued && Objects.equals(lastLogin, user.lastLogin) && Objects.equals(lastBadLogin, user.lastBadLogin) && badLoginCount == user.badLoginCount;
+        return userId == user.userId && Objects.equals(firstName, user.firstName)
+                && Objects.equals(lastName, user.lastName) && Objects.equals(loginName, user.loginName)
+                && Objects.equals(pass, user.pass) && isBloqued == user.isBloqued
+                && Objects.equals(lastLogin, user.lastLogin) && Objects.equals(lastBadLogin, user.lastBadLogin)
+                && badLoginCount == user.badLoginCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, firstName, lastName, loginName, pass, isBloqued, lastLogin, lastBadLogin, badLoginCount);
+        return Objects.hash(userId, firstName, lastName, loginName, pass, isBloqued, lastLogin, lastBadLogin,
+                badLoginCount);
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " userId='" + getUserId() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", loginName='" + getLoginName() + "'" +
-            ", pass='" + getPass() + "'" +
-            ", isBloqued='" + getIsBloqued() + "'" +
-            ", lastLogin='" + getLastLogin() + "'" +
-            ", lastBadLogin='" + getLastBadLogin() + "'" +
-            ", badLoginCount='" + getBadLoginCount() + "'" +
-            "}";
+        return "{" + " userId='" + getUserId() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='"
+                + getLastName() + "'" + ", loginName='" + getLoginName() + "'" + ", pass='" + getPass() + "'"
+                + ", isBloqued='" + getIsBloqued() + "'" + ", lastLogin='" + getLastLogin() + "'" + ", lastBadLogin='"
+                + getLastBadLogin() + "'" + ", badLoginCount='" + getBadLoginCount() + "'" + "}";
     }
-    
-    
+
 }

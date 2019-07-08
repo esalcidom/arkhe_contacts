@@ -1,5 +1,6 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.OneToOne;
 
 /**
@@ -17,7 +21,8 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @Table(name = "TABLE_TAX_REG")
-public class TaxRef {
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class TaxRef implements Serializable {
 
     @Id
     @Column(name = "TAX_ID")

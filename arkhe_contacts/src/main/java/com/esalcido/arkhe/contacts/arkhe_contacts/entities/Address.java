@@ -1,5 +1,6 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -13,12 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Address
  */
 @Entity
 @Table(name = "TABLE_ADDRESS")
-public class Address {
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class Address implements Serializable {
 
     @Id
     @Column(name = "ADDRESS_ID")
@@ -34,11 +38,11 @@ public class Address {
     private String zipCode;
     @Column(name = "NEIGHBORHOOD")
     private String neighbordhood;
-    //@OneToOne(cascade = CascadeType.ALL)
+    // @OneToOne(cascade = CascadeType.ALL)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CITY_ID", referencedColumnName = "CITY_ID", nullable = false)
     private City city;
-    //@OneToOne(cascade = CascadeType.ALL)
+    // @OneToOne(cascade = CascadeType.ALL)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "STATE_ID", referencedColumnName = "STATE_ID", nullable = false)
     private State state;
@@ -170,8 +174,7 @@ public class Address {
     public String toString() {
         return "{" + " AddressId='" + getAddressId() + "'" + ", street='" + getStreet() + "'" + "'" + ", extNum='"
                 + getextNum() + "'" + ", intNum='" + getintNum() + "'" + ", zipCode='" + getZipCode() + "'"
-                + ", reference='" + "'" + ", city='" + getCity() + "'" + ", state='" + getState() + "'" + "'"
-                + "}";
+                + ", reference='" + "'" + ", city='" + getCity() + "'" + ", state='" + getState() + "'" + "'" + "}";
     }
 
 }

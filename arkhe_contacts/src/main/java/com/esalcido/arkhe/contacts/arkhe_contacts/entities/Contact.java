@@ -1,5 +1,6 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,6 +20,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -27,7 +30,8 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
  */
 @Entity
 @Table(name = "TABLE_CONTACT")
-public class Contact {
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class Contact implements Serializable {
 
     @Id
     @Column(name = "CONTACT_ID")
@@ -43,7 +47,7 @@ public class Contact {
     private String phone;
     @Column(name = "EMAIL")
     private String email;
-    //@OneToOne(cascade = CascadeType.ALL)
+    // @OneToOne(cascade = CascadeType.ALL)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID", nullable = false)
     private Address address;
@@ -51,15 +55,15 @@ public class Contact {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = ISO.DATE)
     private Date birthdate;
-    //@OneToOne(cascade = CascadeType.ALL)
+    // @OneToOne(cascade = CascadeType.ALL)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "GENDER", referencedColumnName = "GENDER_ID", nullable = false)
     private Gender gender;
-    //@OneToOne(cascade = CascadeType.ALL)
+    // @OneToOne(cascade = CascadeType.ALL)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TAX_REGIME", referencedColumnName = "TAX_ID", nullable = false)
     private TaxRef taxRegime;
-    //@OneToOne(cascade = CascadeType.ALL)
+    // @OneToOne(cascade = CascadeType.ALL)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "DOCUMENT_TYPE", referencedColumnName = "DOCUMENT_ID", nullable = false)
     private ContactIdent documentType;
@@ -68,7 +72,8 @@ public class Contact {
     @Column(name = "LAST_UPDATE")
     private Date lastUpdate;
 
-    //private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    // private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy
+    // HH:mm:ss");
 
     public Contact() {
         this.address = new Address();
@@ -278,10 +283,10 @@ public class Contact {
     public String toString() {
         return "{" + " contactId='" + getContactId() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='"
                 + getLastName() + "'" + ", otherName='" + getOtherName() + "'" + ", phone='" + getPhone() + "'"
-                + ", email='" + getEmail() + "'" + ", address='" + getAddress() + "'" + ", birthdate='"
-                + getBirthdate() + "'" + ", gender='" + getGender() + "'" + ", taxRegime='" + getTaxRegime() + "'"
-                + ", documentType='" + getDocumentType() + "'" + ", documentNumber='" + getDocumentNumber() + "'"
-                + ", lastUpdate='" + getLastUpdate() + "'" + "}";
+                + ", email='" + getEmail() + "'" + ", address='" + getAddress() + "'" + ", birthdate='" + getBirthdate()
+                + "'" + ", gender='" + getGender() + "'" + ", taxRegime='" + getTaxRegime() + ", documentType='"
+                + getDocumentType() + "'" + ", documentNumber='" + getDocumentNumber() + "'" + ", lastUpdate='"
+                + getLastUpdate() + "'" + "}";
     }
 
 }

@@ -1,5 +1,6 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,20 +10,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Country
  */
 @Entity
-@Table(name="COUNTRY")
-public class Country {
+@Table(name = "COUNTRY")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class Country implements Serializable {
 
     @Id
-    @Column(name="COUNTRY_ID")
+    @Column(name = "COUNTRY_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int countryId;
-    @Column(name="NAME")
+    @Column(name = "NAME")
     private String name;
-
 
     public Country() {
     }
@@ -76,10 +79,7 @@ public class Country {
 
     @Override
     public String toString() {
-        return "{" +
-            " countryId='" + getCountryId() + "'" +
-            ", name='" + getName() + "'" +
-            "}";
+        return "{" + " countryId='" + getCountryId() + "'" + ", name='" + getName() + "'" + "}";
     }
 
 }

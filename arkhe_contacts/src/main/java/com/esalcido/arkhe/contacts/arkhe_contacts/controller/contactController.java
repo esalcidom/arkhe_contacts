@@ -24,7 +24,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 /**
  * contactController
  */
@@ -84,13 +83,15 @@ public class ContactController {
     }
 
     @PostMapping("/contact/{id}")
-    public String deleteContact(@ModelAttribute("contact") Contact cont, @PathVariable("id") String contact_id, BindingResult result,
-    SessionStatus status) {
+    public String deleteContact(@ModelAttribute("contact") Contact cont, @PathVariable("id") String contact_id,
+            BindingResult result, SessionStatus status) {
         Contact contact = contactRepostitory.findById(Long.parseLong(contact_id)).get();
         Address address = contact.getAddress();
         addressRepository.deleteById(address.getAddressId());
         contactRepostitory.deleteById(contact.getContactId());
         return "redirect:/home";
     }
-    
-}
+
+    }
+             
+

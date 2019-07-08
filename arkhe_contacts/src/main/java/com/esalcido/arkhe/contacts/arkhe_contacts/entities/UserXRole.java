@@ -1,5 +1,6 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,18 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
-public class UserXRole{
+@Table(name = "USER")
+public class UserXRole implements Serializable {
 
     @Id
-    @Column(name="X_ID")
+    @Column(name = "X_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long xId;
-    @Column(name="USER_ID")
+    @Column(name = "USER_ID")
     private long userId;
-    @Column(name="ROLE_ID")
+    @Column(name = "ROLE_ID")
     private long roleId;
-    
 
     public UserXRole() {
     }
@@ -89,11 +89,8 @@ public class UserXRole{
 
     @Override
     public String toString() {
-        return "{" +
-            " xId='" + getXId() + "'" +
-            ", userId='" + getUserId() + "'" +
-            ", roleId='" + getRoleId() + "'" +
-            "}";
+        return "{" + " xId='" + getXId() + "'" + ", userId='" + getUserId() + "'" + ", roleId='" + getRoleId() + "'"
+                + "}";
     }
 
 }

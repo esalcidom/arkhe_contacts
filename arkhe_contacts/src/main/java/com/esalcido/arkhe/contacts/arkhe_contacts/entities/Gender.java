@@ -1,5 +1,6 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -12,12 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Gender
  */
 @Entity
 @Table(name = "TABLE_GENDER")
-public class Gender {
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class Gender implements Serializable {
 
     @Id
     @Column(name = "GENDER_ID")
