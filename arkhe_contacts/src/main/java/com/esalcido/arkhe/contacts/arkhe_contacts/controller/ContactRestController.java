@@ -4,7 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Address;
+import com.esalcido.arkhe.contacts.arkhe_contacts.entities.City;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Contact;
+import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.AddressRepository;
+import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.CityRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactRepository;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -25,6 +29,10 @@ public class ContactRestController {
 
     @Autowired
     ContactRepository contactRepository;
+    @Autowired
+    private CityRepository cityRepository;
+    @Autowired
+    private AddressRepository addressRepository;
 
     @RequestMapping(value = "/rest/contacts", method = RequestMethod.GET)
     public List<Contact> getContacts() {
@@ -38,10 +46,34 @@ public class ContactRestController {
 
     @RequestMapping(value = "/rest/contact", method = RequestMethod.POST)
     public ResponseEntity<Object> createContact(@RequestBody Contact newContact) {
+        Address address = newContact.getAddress();
+        City city = (cityRepository.findByName(address.getCity().getName().toUpperCase()));
+        if (city == null) {
+            city = cityRepository.save(address.getCity());
+        }
+        address.setCity(city);
+        address = addressRepository.save(address);
+        newContact.setAddress(address);
         Contact savedContact = contactRepository.save(newContact);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(savedContact.getContactId()).toUri();
         return ResponseEntity.created(location).build();
+    }
+
+    @RequestMapping(value = "/rest/contact/{id}", method = RequestMethod.DELETE)
+    public void deleteBook(@PathVariable Long id) {
+        contactRepository.deleteById(id);
+    }
+
+    @RequestMapping(value = "/rest/contact/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Object> updateContact(@RequestBody Contact contact, @PathVariable Long id) {
+
+        Optional<Contact> contactOptional = contactRepository.findById(id);
+        if (!contactOptional.isPresent())
+            return ResponseEntity.notFound().build();
+        contact.setContactId(id);
+        contactRepository.save(contact);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -20,27 +20,30 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
-
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         // http.authorizeRequests().antMatchers("/api/*","/js/**","/css/**").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
-        http.authorizeRequests().antMatchers("/","/**").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login");
+        http.authorizeRequests().antMatchers("/", "/**").permitAll().anyRequest().authenticated().and().formLogin()
+                .loginPage("/login");
+        http.cors().and().csrf().disable();
         // .failureUrl("/login?error=true").defaultSuccessUrl("/home").and().logout()
-        // .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/access-denied");
+        // .logoutRequestMatcher(new
+        // AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/access-denied");
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // auth.inMemoryAuthentication().withUser("sa").password("sa").roles("USER");
         // auth.userDetailsService(userDetailsService);
     }
 
     // @Override
     // public void configure(WebSecurity web) throws Exception {
-    //     web
-    //             .ignoring()
-    //             .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+    // web
+    // .ignoring()
+    // .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**",
+    // "/images/**");
     // }
 }
