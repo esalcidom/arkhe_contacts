@@ -1,7 +1,5 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.repositories;
 
-import java.util.List;
-
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.State;
 
 import org.springframework.data.jpa.repository.JpaRepository;
