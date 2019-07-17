@@ -1,16 +1,13 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,12 +17,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "TABLE_CONTACT_IDENT")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class ContactIdent implements Serializable {
+public class ContactIdent {
 
     @Id
     @Column(name = "DOCUMENT_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int documentId;
+    @NotNull
+    @Size(min=1, max=20, message="Document type should be between 1 and 20 characters long")
     @Column(name = "DOCUMENT_NAME")
     private String documentName;
     // @OneToOne(mappedBy = "documentType")

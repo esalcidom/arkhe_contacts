@@ -1,17 +1,15 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,12 +19,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "TABLE_GENDER")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Gender implements Serializable {
+public class Gender{
 
     @Id
     @Column(name = "GENDER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int genderId;
+    @NotNull
+    @Size(min=1, max=20, message="Gender type should be between 1 and 20 characters long")
     @Column(name = "GENDER_NAME")
     private String name;
     // @OneToOne(mappedBy = "gender")

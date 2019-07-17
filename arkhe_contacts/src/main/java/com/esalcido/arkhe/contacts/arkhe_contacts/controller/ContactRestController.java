@@ -7,12 +7,14 @@ import java.util.Optional;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Address;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.City;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Contact;
+import com.esalcido.arkhe.contacts.arkhe_contacts.error.ContactNotFoundException;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.AddressRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.CityRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactRepository;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,17 +36,20 @@ public class ContactRestController {
     @Autowired
     private AddressRepository addressRepository;
 
-    @RequestMapping(value = "/rest/contacts", method = RequestMethod.GET)
+    @RequestMapping(value = "/rest/contacts", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public List<Contact> getContacts() {
         return contactRepository.findAll();
     }
 
-    @RequestMapping(value = "/rest/contact/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/rest/contact/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public Optional<Contact> getContact(@PathVariable Long id) {
-        return contactRepository.findById(id);
+        Optional<Contact> foundContact = contactRepository.findById(id);
+        if(!foundContact.isPresent())
+            throw new ContactNotFoundException("Not found ID -> " + id);
+        return foundContact;
     }
 
-    @RequestMapping(value = "/rest/contact", method = RequestMethod.POST)
+    @RequestMapping(value = "/rest/contact", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Object> createContact(@RequestBody Contact newContact) {
         Address address = newContact.getAddress();
         City city = (cityRepository.findByName(address.getCity().getName().toUpperCase()));
@@ -60,17 +65,17 @@ public class ContactRestController {
         return ResponseEntity.created(location).build();
     }
 
-    @RequestMapping(value = "/rest/contact/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/rest/contact/{id}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public void deleteBook(@PathVariable Long id) {
         contactRepository.deleteById(id);
     }
 
-    @RequestMapping(value = "/rest/contact/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/rest/contact/{id}", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Object> updateContact(@RequestBody Contact contact, @PathVariable Long id) {
 
         Optional<Contact> contactOptional = contactRepository.findById(id);
         if (!contactOptional.isPresent())
-            return ResponseEntity.notFound().build();
+            throw new ContactNotFoundException("Not found ID -> " + id);
         contact.setContactId(id);
         contactRepository.save(contact);
         return ResponseEntity.noContent().build();

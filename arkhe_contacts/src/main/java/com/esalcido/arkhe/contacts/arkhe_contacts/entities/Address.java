@@ -1,9 +1,7 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,18 +22,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "TABLE_ADDRESS")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Address implements Serializable {
+public class Address{
 
     @Id
     @Column(name = "ADDRESS_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long addressId;
+    @NotNull
+    @Size(min=1, max=50, message="Street should be between 1 and 50 characters long")
     @Column(name = "STREET")
     private String street;
+    @NotNull
+    @Size(min=1, max=10, message = "Exterior number should be between 1 and 10 characters long")
     @Column(name = "EXT_NUM")
     private String extNum;
     @Column(name = "INT_NUM")
     private String intNum;
+    @NotNull
+    @Size(min=1, max=10, message = "Zipcode should be between 1 and 10 character long")
     @Column(name = "ZIPCODE")
     private String zipCode;
     @Column(name = "NEIGHBORHOOD")

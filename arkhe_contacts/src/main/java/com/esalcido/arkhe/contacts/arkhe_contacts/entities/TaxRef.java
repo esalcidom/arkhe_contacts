@@ -1,6 +1,5 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -18,12 +19,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "TABLE_TAX_REG")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class TaxRef implements Serializable {
+public class TaxRef{
 
     @Id
     @Column(name = "TAX_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int taxID;
+    @NotNull
+    @Size(min=1, max=20, message="Tax Reg type should be between 1 and 20 characters long")
     @Column(name = "TAX_NAME")
     private String taxName;
 

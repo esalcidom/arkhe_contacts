@@ -1,12 +1,8 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,11 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,14 +28,18 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @Entity
 @Table(name = "TABLE_CONTACT")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Contact implements Serializable {
+public class Contact{
 
     @Id
     @Column(name = "CONTACT_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long contactId;
+    @NotNull
+    @Size(min=1, max = 30, message = "First name should have between 1 to 30 characters long")
     @Column(name = "FIRST_NAME")
     private String firstName;
+    @NotNull
+    @Size(min=1, max = 30, message = "Last name should have between 1 to 30 characters long")
     @Column(name = "LAST_NAME")
     private String lastName;
     @Column(name = "OTHER_NAME")
@@ -51,11 +52,13 @@ public class Contact implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID", nullable = false)
     private Address address;
+    @NotNull
     @Column(name = "BIRTHDATE")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = ISO.DATE)
     private Date birthdate;
     // @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "GENDER", referencedColumnName = "GENDER_ID", nullable = false)
     private Gender gender;

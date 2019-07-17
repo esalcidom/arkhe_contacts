@@ -1,6 +1,5 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -18,12 +19,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "TABLE_STATE")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class State implements Serializable {
+public class State{
 
     @Id
     @Column(name = "STATE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long stateId;
+    @NotNull
+    @Size(min=1, max=30, message="State should be between 1 and 30 characters long")
     @Column(name = "STATE_NAME")
     private String name;
     // @OneToOne(mappedBy = "state")
