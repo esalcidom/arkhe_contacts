@@ -11,7 +11,6 @@ import com.esalcido.arkhe.contacts.arkhe_contacts.error.ContactNotFoundException
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.AddressRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.CityRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactRepository;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
