@@ -1,15 +1,11 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.controller;
 
-import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Address;
-import com.esalcido.arkhe.contacts.arkhe_contacts.entities.City;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Contact;
-import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.AddressRepository;
-import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.CityRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactIdentRepository;
-import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.GenderRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.StateRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.TaxRefRepository;
+import com.esalcido.arkhe.contacts.arkhe_contacts.services.ContactService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +23,8 @@ import org.springframework.web.bind.support.SessionStatus;
 @Controller
 public class ContactController {
 
-    @Autowired
-    private ContactRepository contactRepostitory;
+    // @Autowired
+    // private ContactRepository contactRepostitory;
     @Autowired
     private GenderRepository genderRepository;
     @Autowired
@@ -37,10 +33,12 @@ public class ContactController {
     private TaxRefRepository taxRefRepository;
     @Autowired
     private ContactIdentRepository contactIdentRepository;
+    // @Autowired
+    // private CityRepository cityRepository;
     @Autowired
-    private CityRepository cityRepository;
-    @Autowired
-    private AddressRepository addressRepository;
+    private ContactService contactService;
+    // @Autowired
+    // private AddressRepository addressRepository;
 
     @GetMapping("/contact/new")
     public String newContact(Model model) {
@@ -60,32 +58,21 @@ public class ContactController {
         model.addAttribute("taxList", taxRefRepository.findAll());
         model.addAttribute("docList", contactIdentRepository.findAll());
         model.addAttribute("stateList", stateRepository.findAll());
-        model.addAttribute("contact", contactRepostitory.findById(Long.parseLong(contact_id)).get());
+        model.addAttribute("contact", contactService.findById(Long.parseLong(contact_id)).get());
         return "contactform";
     }
 
     @PostMapping("/contact")
     public String createContact(@ModelAttribute("contact") Contact contact, BindingResult result,
             SessionStatus status) {
-        Address address = contact.getAddress();
-        City city = (cityRepository.findByName(address.getCity().getName().toUpperCase()));
-        if (city == null) {
-            city = cityRepository.save(address.getCity());
-        }
-        address.setCity(city);
-        address = addressRepository.save(address);
-        contact.setAddress(address);
-        contactRepostitory.save(contact);
+        contactService.save(contact);
         return "redirect:/home";
     }
 
     @PostMapping("/contact/{id}")
     public String deleteContact(@ModelAttribute("contact") Contact cont, @PathVariable("id") String contact_id,
             BindingResult result, SessionStatus status) {
-        Contact contact = contactRepostitory.findById(Long.parseLong(contact_id)).get();
-        Address address = contact.getAddress();
-        addressRepository.deleteById(address.getAddressId());
-        contactRepostitory.deleteById(contact.getContactId());
+        contactService.deleteById(Long.parseLong(contact_id));
         return "redirect:/home";
     }
 
