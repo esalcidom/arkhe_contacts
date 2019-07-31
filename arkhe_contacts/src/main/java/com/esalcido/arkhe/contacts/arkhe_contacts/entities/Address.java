@@ -93,19 +93,19 @@ public class Address{
         this.street = street;
     }
 
-    public String getextNum() {
+    public String getExtNum() {
         return this.extNum;
     }
 
-    public void setextNum(String extNum) {
+    public void setExtNum(String extNum) {
         this.extNum = extNum;
     }
 
-    public String getintNum() {
+    public String getIntNum() {
         return this.intNum;
     }
 
-    public void setintNum(String intNum) {
+    public void setIntNum(String intNum) {
         this.intNum = intNum;
     }
 
@@ -179,7 +179,7 @@ public class Address{
     @Override
     public String toString() {
         return "{" + " AddressId='" + getAddressId() + "'" + ", street='" + getStreet() + "'" + "'" + ", extNum='"
-                + getextNum() + "'" + ", intNum='" + getintNum() + "'" + ", zipCode='" + getZipCode() + "'"
+                + getExtNum() + "'" + ", intNum='" + getIntNum() + "'" + ", zipCode='" + getZipCode() + "'"
                 + ", reference='" + "'" + ", city='" + getCity() + "'" + ", state='" + getState() + "'" + "'" + "}";
     }
 

@@ -46,7 +46,7 @@
                         <td th:text="${contact.firstName + ' ' + contact.lastName}"></td>
                         <td th:text="${contact.email}"></td>
                         <td th:text="${contact.phone}"></td>
-                        <td th:text="${contact.address.street + ', ' + contact.address.extNum + ', ' + contact.address.city.name + ', ' + contact.address.state.name}"></td>
+                        <td th:text="${contact.address.street + ' ' + contact.address.extNum + ', ' + contact.address.city.name + ', ' + contact.address.state.name}"></td>
                         <td th:text="${contact.taxRegime.taxName}"></td>
                     </tr>
             </table>
