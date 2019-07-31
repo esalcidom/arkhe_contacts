@@ -7,6 +7,7 @@ import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Contact;
 import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,7 +26,7 @@ public class ContactService{
     }
 
     public List<Contact> findAll(){
-        return contactRepository.findAll();
+        return contactRepository.findAll(Sort.by("firstName").ascending().and(Sort.by("lastName")));
     }
 
     public Optional<Contact> findById(long id){

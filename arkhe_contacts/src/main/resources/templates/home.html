@@ -17,6 +17,10 @@
                 <img class="img-logo" th:src="@{/img/logo_200x200.png}">
             </a>
         </nav>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
         <nav class="user-container">
             <img class="img-user" src="http://milkicons.com/icons/character/outlined/1_character1.png">
             <div class="txt-user">Emmanuel</div>
@@ -25,10 +29,10 @@
     <div class="main-container">
         <div class="contact-container">
             <table>
-                <thead>
+                <!-- <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">First Name</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Mail</th>
                         <th scope="col">Address ID</th>
@@ -36,17 +40,14 @@
                         <th scope="col">TAX ID</th>
                         <th scope="col">Document type</th>
                     </tr>
-                </thead>
+                </thead> -->
                     <tr th:each="contact:${contacts}" style="cursor: pointer"
                     th:onclick="'javascript:rowClicked(\'' + ${contact.contactId} + '\');'">
-                        <td th:text="${contact.contactId}"></td>
-                        <td th:text="${contact.firstName}"></td>
-                        <td th:text="${contact.lastName}"></td>
+                        <td th:text="${contact.firstName + ' ' + contact.lastName}"></td>
                         <td th:text="${contact.email}"></td>
-                        <td th:text="${contact.address.addressId}"></td>
-                        <td th:text="${contact.gender.genderId}"></td>
-                        <td th:text="${contact.taxRegime.taxID}"></td>
-                        <td th:text="${contact.documentType.documentId}"></td>
+                        <td th:text="${contact.phone}"></td>
+                        <td th:text="${contact.address.street + ', ' + contact.address.extNum + ', ' + contact.address.city.name + ', ' + contact.address.state.name}"></td>
+                        <td th:text="${contact.taxRegime.taxName}"></td>
                     </tr>
             </table>
         </div>
