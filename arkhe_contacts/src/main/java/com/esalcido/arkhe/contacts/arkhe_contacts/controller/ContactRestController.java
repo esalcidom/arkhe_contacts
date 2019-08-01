@@ -3,16 +3,9 @@ package com.esalcido.arkhe.contacts.arkhe_contacts.controller;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
-import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Address;
-import com.esalcido.arkhe.contacts.arkhe_contacts.entities.City;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Contact;
 import com.esalcido.arkhe.contacts.arkhe_contacts.error.ContactNotFoundException;
-import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.AddressRepository;
-import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.CityRepository;
-import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.ContactRepository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.services.ContactService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +24,6 @@ public class ContactRestController {
 
     @Autowired
     private ContactService contactService;
-    // @Autowired
-    // private CityRepository cityRepository;
-    // @Autowired
-    // private AddressRepository addressRepository;
 
     @RequestMapping(value = "/rest/contacts", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE })

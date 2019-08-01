@@ -26,7 +26,11 @@ public class ContactService{
     }
 
     public List<Contact> findAll(){
-        return contactRepository.findAll(Sort.by("firstName").ascending().and(Sort.by("lastName")));
+        return contactRepository.findAll(Sort.by("firstName").ascending().and(Sort.by("lastName").ascending()));
+    }
+
+    public List<Contact> findByFirstNameContaining(String name){
+        return contactRepository.findByFirstNameContaining(name);
     }
 
     public Optional<Contact> findById(long id){

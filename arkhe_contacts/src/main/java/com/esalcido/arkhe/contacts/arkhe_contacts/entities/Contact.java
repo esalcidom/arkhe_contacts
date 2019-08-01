@@ -108,7 +108,7 @@ public class Contact{
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName.toUpperCase();
     }
 
     public String getLastName() {
@@ -116,7 +116,7 @@ public class Contact{
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.toUpperCase();
     }
 
     public String getOtherName() {

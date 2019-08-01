@@ -39,6 +39,8 @@
                 <input type="text" class="form-control" id="input-other-name" placeholder="Nickname" th:field="*{otherName}">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="input-email" placeholder="email@email.com" th:field="*{email}">
+                <label for="email">Phone</label>
+                <input type="tel" class="form-control" id="input-tel" placeholder="3310203040" th:field="*{phone}">
                 <label for="birthday">Birthday</label>
                 <input id="datepicker" type="date" name="datepicker" class="form-control" th:text="${#temporals.format(localDate, 'dd-mm-yyyy')}" th:field="*{birthdate}"/>
                 <div class="form-group col-md-4">

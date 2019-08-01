@@ -63,7 +63,7 @@ public class ContactController {
     }
 
     @PostMapping("/contact")
-    public String createContact(@ModelAttribute("contact") Contact contact, BindingResult result,
+    public String updateContact(@ModelAttribute("contact") Contact contact, BindingResult result,
             SessionStatus status) {
         contactService.save(contact);
         return "redirect:/home";
