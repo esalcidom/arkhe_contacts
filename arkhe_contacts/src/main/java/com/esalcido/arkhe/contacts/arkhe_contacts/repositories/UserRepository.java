@@ -3,7 +3,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.User;
 
-@Repository("userRepository")
+// @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Long>{
-    User findByLoginName(String loginName);
+    User findByUsername(String username);
 }

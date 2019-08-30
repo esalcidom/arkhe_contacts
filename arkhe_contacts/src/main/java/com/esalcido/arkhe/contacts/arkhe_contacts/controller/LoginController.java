@@ -15,4 +15,9 @@ public class LoginController {
         return "login";
     }
     
+    @RequestMapping(value={"/loginFailed"}, method = RequestMethod.GET)
+    public String getLoginFailedPage(){
+        return "loginFailed";
+    }
+
 }
