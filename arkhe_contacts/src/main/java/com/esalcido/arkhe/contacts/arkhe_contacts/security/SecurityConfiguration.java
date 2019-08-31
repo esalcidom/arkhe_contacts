@@ -39,21 +39,30 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   // }
 
+  @Bean DaoAuthenticationProvider authenticationProvider(){
+    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+    authProvider.setUserDetailsService(userService);
+    authProvider.setPasswordEncoder(passwordEncoder());
+    return authProvider;
+  }
+
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-    //auth.authenticationProvider(authenticationProvider());
-    auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+    auth.authenticationProvider(authenticationProvider());
+    // auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-    .antMatchers("/home", "/contactform").access("hasRole('ROLE_USER')")
-    .antMatchers("/",  "/**").access("permitAll")
+    // .antMatchers("/home", "/contactform").access("hasRole('ROLE_USER')")
+    .antMatchers("/home","/contactform").hasAnyRole("USER", "ADMIN")
+    .and()
+    .authorizeRequests().antMatchers("/resource/**","/**", "/", "/api/*","/js/**","/css/**").access("permitAll")
     .and()
     .formLogin().loginPage("/login")
-    // .loginProcessingUrl("/authenticate")
-    // .defaultSuccessUrl("/home", true)
+    .defaultSuccessUrl("/home", true)
+    .failureUrl("/loginFailed")
     .and()
     .csrf().ignoringAntMatchers("/h2-console/**")
     .and()  

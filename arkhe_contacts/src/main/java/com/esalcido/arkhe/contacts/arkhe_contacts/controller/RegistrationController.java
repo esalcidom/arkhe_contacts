@@ -1,6 +1,12 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.controller;
 
-import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.UserRepository;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Authority;
+import com.esalcido.arkhe.contacts.arkhe_contacts.repositories.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +26,13 @@ public class RegistrationController {
 
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthorityRepository authorityRepository;
     
-    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository){
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.authorityRepository = authorityRepository;
     }
 
     @GetMapping
@@ -34,6 +43,10 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(@ModelAttribute("form") RegistrationForm form, BindingResult result, SessionStatus status) {
+        Authority userAuthority = authorityRepository.findById(1L).get();
+        Set<Authority> roles = new HashSet<>();
+        roles.add(userAuthority);
+        form.setRoles(roles);
         userRepository.save(form.toUser(passwordEncoder));
         return "redirect:/login";
     }

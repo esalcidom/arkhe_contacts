@@ -3,14 +3,23 @@ package com.esalcido.arkhe.contacts.arkhe_contacts.entities;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,10 +28,12 @@ import lombok.RequiredArgsConstructor;
 
 // @Table(name = "TABLE_USER") 
 // @NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
+
+// @NoArgsConstructor(access=AccessLevel.PUBLIC, force=true)
+// @RequiredArgsConstructor
 @Entity
 @Data
-@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
-@RequiredArgsConstructor
+@Table(name = "USER")
 public class User implements UserDetails{
     
     private static final long serialVersionUID = 1L;
@@ -30,8 +41,9 @@ public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    @Column(name = "USERNAME")
     private String username;
+    @Column(name = "PASSWORD")
     private String password;
     // private String firstName;
     // private String lastName;
@@ -53,18 +65,24 @@ public class User implements UserDetails{
     // @Column(name = "BAD_LOGIN_COUNT")
     // private int badLoginCount;
 
-    // @ManyToMany
-    // @JoinTable(name = "TABLE_USER_X_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-    // Set<Role> roles;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_AUTHORITY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID"))
+    private Set<Authority> roles;
 
-	public User(String username, String password) {
+    public User(){
+
+    }
+
+	public User(String username, String password, Set<Authority> roles) {
         this.username = username;
         this.password = password;
+        this.roles = roles;
 	}
 
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        // return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return this.roles.stream().map(authority -> new SimpleGrantedAuthority(authority.getName().toString())).collect(Collectors.toList());
     }
 
     @Override
@@ -97,8 +115,13 @@ public class User implements UserDetails{
         return username;
     }
 
-    // public User() {
-    // }
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
 
     // public User(long userId, String firstName, String lastName, String username, String password, int isActive, Date lastLogin, Date lastBadLogin, int badLoginCount) {
     //     this.userId = userId;

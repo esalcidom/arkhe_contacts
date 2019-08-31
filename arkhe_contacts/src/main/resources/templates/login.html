@@ -20,17 +20,17 @@
               <label class="lbl-login">Log in</label>
               </div>
              <div class="form-container">
-                <form id="login-form" th:action="@{/login}" method="POST">        
+                <form id="login-form" th:object="${user}" th:action="@{/login}" method="POST">        
                     <div class="txt-container">
                         <label class="lbl-user">User Name: </label>
                         <br>
-                        <input type="text" class="form-control" name="loginName"/>
+                        <input type="text" class="form-control" name="username" th:field="*{username}" th:value="*{username}"/>
                   </div>
                         <br>
                   <div class="txt-container">
                         <label class="lbl-user">Password: </label>
                         <br>
-                        <input type="password" class="form-control" name="pass"/>
+                        <input type="password" class="form-control" name="password" th:field="*{password}" th:value="*{password}"/>
                     </div>
                   <br>
                     <div>

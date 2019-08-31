@@ -1,7 +1,11 @@
 package com.esalcido.arkhe.contacts.arkhe_contacts.controller;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.esalcido.arkhe.contacts.arkhe_contacts.entities.Authority;
+import com.esalcido.arkhe.contacts.arkhe_contacts.entities.AuthorityType;
 import com.esalcido.arkhe.contacts.arkhe_contacts.entities.User;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,14 +22,16 @@ public class RegistrationForm {
     // private String lastName;
     private String username;
     private String password;
+    private Set<Authority> roles;
 
     public RegistrationForm(){
         
     }
 
-    public RegistrationForm(String username, String password) {
+    public RegistrationForm(String username, String password, Set<Authority> roles) {
         this.username = username;
         this.password = password;
+        this.roles = roles;
     
     }
 
@@ -41,6 +47,14 @@ public class RegistrationForm {
         return this.password;
     }
 
+    public Set<Authority> getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(Set<Authority> roles) {
+        this.roles = roles;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -51,6 +65,6 @@ public class RegistrationForm {
     
     
     public User toUser(PasswordEncoder passwordEncoder){
-        return new User(username, passwordEncoder.encode(this.password));
+        return new User(username, passwordEncoder.encode(this.password), roles);
     }
 }
