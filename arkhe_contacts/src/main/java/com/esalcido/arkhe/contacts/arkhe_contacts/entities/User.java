@@ -123,6 +123,10 @@ public class User implements UserDetails{
         this.password = password;
     }
 
+	public Object getId() {
+		return this.id;
+	}
+
     // public User(long userId, String firstName, String lastName, String username, String password, int isActive, Date lastLogin, Date lastBadLogin, int badLoginCount) {
     //     this.userId = userId;
     //     this.firstName = firstName;

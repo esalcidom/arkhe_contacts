@@ -3,6 +3,12 @@ body{
   padding:0px;
   font-family: Poppins,sans-serif;
 }
+a:link, a:visited, a:active, a:hover{
+  margin: 10px;
+  color: black;
+  font-size: 13px;
+}
+
 .main-container{
   display:grid;
   grid-template-columns:70% 30%;

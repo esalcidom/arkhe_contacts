@@ -26,7 +26,7 @@
         </form>
         <nav class="user-container">
             <img class="img-user" src="http://milkicons.com/icons/character/outlined/1_character1.png">
-            <div class="txt-user">Emmanuel</div>
+            <div class="txt-user" th:text="${currentUser.username}"></div>
         </nav>
     </nav>
     <div class="main-container">
@@ -44,6 +44,7 @@
                 </tr>
             </table>
             <button class="btn btn-success btn-create-contact" onclick="location.href = 'contact/new'">+</button>
+            <button class="btn btn-outline-danger btn-create-contact" onclick="location.href = 'logout'">-</button>
         </div>
         
     </div>
