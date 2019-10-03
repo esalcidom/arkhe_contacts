@@ -33,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 // @RequiredArgsConstructor
 @Entity
 @Data
-@Table(name = "USER")
+@Table(name = "TABLE_USER")
 public class User implements UserDetails{
     
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class User implements UserDetails{
     private long id;
     @Column(name = "USERNAME")
     private String username;
-    @Column(name = "PASSWORD")
+    @Column(name = "PASS")
     private String password;
     // private String firstName;
     // private String lastName;

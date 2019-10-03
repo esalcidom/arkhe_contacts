@@ -18,7 +18,7 @@ import com.esalcido.arkhe.contacts.arkhe_contacts.entities.AuthorityType;
  * Role
  */
 @Entity
-@Table(name = "AUTHORITY")
+@Table(name = "TABLE_AUTHORITY")
 public class Authority {
 
     @Id
